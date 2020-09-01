@@ -1,0 +1,61 @@
+<input type="number" name="articuloID" id="articuloID" placeholder="Ingrese el ID">
+<br>
+<select id="articuloEs">
+    <option selected>Estado de Producto</option>
+    <option value="1">Activo</option>
+    <option value="0">Inactivo</option>
+</select> 
+
+<br>
+<input type="date" name="articulodate" id="articulodate" readonly>
+<br>
+<input type="text" name="articuloNomEdit" id="articuloNomEdit"
+       placeholder="Ingrese el nombre" required>
+<br>
+<input type="text" name="articuloDes" id="articuloDes" placeholder="Descripcion" required>
+<br>
+<input type="text" name="articuloUM" id="articuloUM" placeholder="Kilo" required>
+<br>
+<input type="number" name="articuloPeso" id="articuloPeso" placeholder="Ingrese el peso" required>
+<br>
+<input type="number" name="articuloPUG" id="articuloPUG" placeholder="Ingrese el precio General" required>
+<br>
+<input type="number" name="articuloCAN" id="articuloCAN" placeholder="Cantidad" required>
+<br>
+<input type="number" name="articuloRE" id="articuloRE" placeholder="Re_Orden" required>
+<br>
+<input type="text" name="articuloprov" id="articuloprov" placeholder="Proveedor" required>
+<br>
+<textarea id='ArticuloCOM' ></textarea>
+<br>
+<input type="submit" id="saveInsumo" value='Guardar Insumo'>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#saveInsumo").click(function () {
+            let params = {
+                ID: $("#articuloID").val(),
+                ES: $("#articuloEs").val(),
+                ED: $("#articuloNomEdit").val(),
+                DES: $("#articuloDes").val(),
+                PESO: $("#articuloUM").val(),
+                UM: $("#articuloPeso").val(),
+                PG: $("#articuloPUG").val(),
+                CAN: $("#articuloCAN").val(),
+                RE:$("#articuloRE").val(),
+                COM:$("#ArticuloCOM").val(),
+                Prov:$("#articuloprov").val(),
+            };
+            console.log(params);
+            $.post("Enviar.php", params, function (d) {
+                if (d.autentificado) {
+                    alert(d.nombre);
+                } else {
+                    alert('Error');
+                }
+            });
+        });
+    });
+</script>
